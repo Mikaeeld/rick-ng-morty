@@ -1,0 +1,17 @@
+<div class="content">
+    <div *ngIf="characters$ | async as characters">
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <div fxFlex="25%" *ngFor="let character of characters.results">
+                <mat-card>
+                    <mat-card-header>
+                        <img mat-card-avatar [src]="character?.image" [alt]="character?.name">
+                        <mat-card-title>{{ character?.name }}</mat-card-title>
+                        <mat-card-subtitle>{{ character?.species }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
