@@ -202,14 +202,16 @@ export type QueryLocationsByIdsArgs = {
   ids: Array<Scalars['ID']>;
 };
 
-export type GetCharactersQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetCharactersQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>;
+}>;
 
 
 export type GetCharactersQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', results?: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null, species?: string | null } | null> | null } | null };
 
 export const GetCharactersDocument = gql`
-    query getCharacters {
-  characters {
+    query getCharacters($page: Int) {
+  characters(page: $page) {
     results {
       id
       name

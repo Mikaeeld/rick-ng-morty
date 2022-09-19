@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { GetCharactersGQL } from '../services/rickAndMortyGraphql.service';
 
@@ -9,8 +10,17 @@ import { GetCharactersGQL } from '../services/rickAndMortyGraphql.service';
 })
 export class CharacterListComponent implements OnInit {
   public characters$;
-  constructor(private characterService: GetCharactersGQL) {
-    this.characters$ = this.characterService.fetch().pipe(map(result => result.data.characters));
+  public page: number = 1;
+  constructor(
+    private route: ActivatedRoute,
+    private characterService: GetCharactersGQL
+  ) {
+    this.route.params.subscribe((params) => {
+      this.page = +params['id'];
+    });
+    this.characters$ = this.characterService
+      .fetch({ page: this.page })
+      .pipe(map((result) => result.data.characters));
   }
 
   ngOnInit(): void {}
