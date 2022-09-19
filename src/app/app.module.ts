@@ -9,13 +9,17 @@ import { CharacterListComponent } from './character-list/character-list.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationListComponent } from './location-list/location-list.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CharacterListComponent,
-    LocationListComponent
+    LocationListComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

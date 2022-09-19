@@ -1,3 +1,6 @@
+<mat-paginator [length]="800" [pageSize]="20" [pageSizeOptions]="[20]" [pageIndex]="this.page-1"
+    (page)="pageChange($event)" aria-label="Select page">
+</mat-paginator>
 <div class="content">
     <div *ngIf="characters$ | async as characters">
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
