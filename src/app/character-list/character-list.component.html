@@ -1,10 +1,7 @@
-<mat-paginator [length]="800" [pageSize]="20" [pageSizeOptions]="[20]" [pageIndex]="this.page-1"
-    (page)="pageChange($event)" aria-label="Select page">
-</mat-paginator>
 <div class="content">
     <div *ngIf="characters$ | async as characters">
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
-            <div fxFlex="25%" *ngFor="let character of characters.results">
+            <div fxFlex="25%" fxFlex.xs="100%" *ngFor="let character of characters.results">
                 <mat-card>
                     <mat-card-header>
                         <img mat-card-avatar [src]="character?.image" [alt]="character?.name">

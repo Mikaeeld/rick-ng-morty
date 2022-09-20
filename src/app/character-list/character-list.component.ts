@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { GetCharactersGQL } from '../services/rickAndMortyGraphql.service';
-import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-character-list',
@@ -12,6 +11,7 @@ import { PageEvent } from '@angular/material/paginator';
 export class CharacterListComponent implements OnInit {
   public characters$;
   public page: number = 1;
+  public characters: number = 20;
   constructor(
     private route: ActivatedRoute,
     private characterService: GetCharactersGQL,
@@ -24,10 +24,6 @@ export class CharacterListComponent implements OnInit {
     this.characters$ = this.characterService
       .fetch({ page: this.page })
       .pipe(map((result) => result.data.characters));
-  }
-
-  pageChange($event: PageEvent) {
-    this.router.navigate([`/${$event.pageIndex + 1}`]);
   }
 
   getCharacters() {
