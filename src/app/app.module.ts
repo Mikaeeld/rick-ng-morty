@@ -13,13 +13,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './header/header.component';
+import { PaginatorComponent } from './shared/paginator/paginator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CharacterListComponent,
     LocationListComponent,
-    HeaderComponent
+    HeaderComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,

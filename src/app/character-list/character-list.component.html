@@ -1,4 +1,5 @@
 <div class="content">
+    <app-paginator></app-paginator>
     <div *ngIf="characters$ | async as characters">
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
             <div fxFlex="25%" fxFlex.xs="100%" *ngFor="let character of characters.results">

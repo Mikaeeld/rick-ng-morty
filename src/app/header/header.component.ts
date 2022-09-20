@@ -9,27 +9,7 @@ import { GetCountsGQL } from '../services/rickAndMortyGraphql.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  public characterCount = 800;
-  public page = 1;
+  constructor() {}
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private countServie: GetCountsGQL
-  ) {}
-
-  ngOnInit(): void {
-    this.countServie.fetch().subscribe((result) => {
-      if (result.data.characters?.info?.count) {
-        this.characterCount = result.data.characters.info.count;
-      }
-    });
-    this.route.params.subscribe((params) => {
-      this.page = +params['id'];
-    });
-  }
-
-  pageChange($event: PageEvent) {
-    this.router.navigate([`/${$event.pageIndex + 1}`]);
-  }
+  ngOnInit(): void {}
 }
