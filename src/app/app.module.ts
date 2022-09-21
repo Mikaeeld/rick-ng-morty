@@ -14,6 +14,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './header/header.component';
 import { PaginatorComponent } from './shared/paginator/paginator.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import { PaginatorComponent } from './shared/paginator/paginator.component';
     CharacterListComponent,
     LocationListComponent,
     HeaderComponent,
-    PaginatorComponent
+    PaginatorComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,9 +34,11 @@ import { PaginatorComponent } from './shared/paginator/paginator.component';
     MatCardModule,
     FlexLayoutModule,
     MatToolbarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

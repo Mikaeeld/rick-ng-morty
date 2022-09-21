@@ -1,7 +1,10 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
-import { GetCharactersGQL } from '../services/rickAndMortyGraphql.service';
+import {
+  FilterCharacter,
+  GetCharactersGQL,
+} from '../services/rickAndMortyGraphql.service';
 
 @Component({
   selector: 'app-character-list',
@@ -12,6 +15,7 @@ export class CharacterListComponent implements OnInit {
   public characters$;
   public page: number = 1;
   public characters: number = 20;
+  private filter: FilterCharacter = {};
   constructor(
     private route: ActivatedRoute,
     private characterService: GetCharactersGQL,
@@ -19,17 +23,22 @@ export class CharacterListComponent implements OnInit {
   ) {
     this.route.params.subscribe((params) => {
       this.page = +params['id'];
-      this.getCharacters();
+      this.getCharacters(this.filter);
     });
     this.characters$ = this.characterService
-      .fetch({ page: this.page })
+      .fetch({ page: this.page, filter: this.filter })
       .pipe(map((result) => result.data.characters));
   }
 
-  getCharacters() {
+  getCharacters(filter?: FilterCharacter) {
     this.characters$ = this.characterService
-      .fetch({ page: this.page })
+      .fetch({ page: this.page, filter: filter })
       .pipe(map((result) => result.data.characters));
+  }
+
+  setFilter(event: any) {
+    this.filter = { name: event.target.value };
+    this.getCharacters(this.filter);
   }
 
   ngOnInit(): void {}

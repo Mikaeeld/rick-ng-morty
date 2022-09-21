@@ -1,4 +1,8 @@
 <div class="content">
+    <mat-form-field appearance="fill">
+        <mat-label>Search by name</mat-label>
+        <input matInput type="text" name="search" id="search" (input)="setFilter($event)">
+    </mat-form-field>
     <app-paginator></app-paginator>
     <div *ngIf="characters$ | async as characters">
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
