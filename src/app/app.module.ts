@@ -16,6 +16,8 @@ import { HeaderComponent } from './header/header.component';
 import { PaginatorComponent } from './shared/paginator/paginator.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { SearchComponent } from './search/search.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
     LocationListComponent,
     HeaderComponent,
     PaginatorComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { MatInputModule } from '@angular/material/input';
     MatToolbarModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

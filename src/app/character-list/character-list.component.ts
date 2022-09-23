@@ -1,6 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
+import { SearchComponent } from '../search/search.component';
 import {
   FilterCharacter,
   GetCharactersGQL,
@@ -15,11 +16,10 @@ export class CharacterListComponent implements OnInit {
   public characters$;
   public page: number = 1;
   public characters: number = 20;
-  private filter: FilterCharacter = {};
+  public filter: FilterCharacter = {};
   constructor(
     private route: ActivatedRoute,
-    private characterService: GetCharactersGQL,
-    private router: Router
+    private characterService: GetCharactersGQL
   ) {
     this.route.params.subscribe((params) => {
       this.page = +params['id'];
@@ -36,8 +36,8 @@ export class CharacterListComponent implements OnInit {
       .pipe(map((result) => result.data.characters));
   }
 
-  setFilter(event: any) {
-    this.filter = { name: event.target.value };
+  filterChanged($event: FilterCharacter) {
+    this.filter = $event;
     this.getCharacters(this.filter);
   }
 

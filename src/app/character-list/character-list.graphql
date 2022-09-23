@@ -5,6 +5,7 @@ query getCharacters($page: Int, $filter: FilterCharacter) {
       name
       image
       species
+      status
     }
   }
 }

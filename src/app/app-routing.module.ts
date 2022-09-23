@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CharacterListComponent } from './character-list/character-list.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: '1', pathMatch: 'full'},
   {path: ':id', component: CharacterListComponent}
 ];
 

@@ -1,0 +1,13 @@
+<mat-form-field appearance="fill">
+    <mat-label>Search by name</mat-label>
+    <input matInput type="text" name="search" id="search" (input)="setName($event)">
+</mat-form-field>
+<mat-form-field appearance="fill">
+    <mat-label>Status</mat-label>
+    <mat-select [(value)]="characterStatus" (selectionChange)="setStatus($event)" name="status">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let status of statuses" [value]="status">
+            {{ status }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

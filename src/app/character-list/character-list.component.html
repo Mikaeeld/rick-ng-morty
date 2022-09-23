@@ -1,8 +1,5 @@
 <div class="content">
-    <mat-form-field appearance="fill">
-        <mat-label>Search by name</mat-label>
-        <input matInput type="text" name="search" id="search" (input)="setFilter($event)">
-    </mat-form-field>
+    <app-search (filterChange)="filterChanged($event)"></app-search>
     <app-paginator></app-paginator>
     <div *ngIf="characters$ | async as characters">
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
@@ -15,6 +12,7 @@
                     </mat-card-header>
                     <img mat-card-image [src]="character?.image" [alt]="character?.name">
                     <mat-card-content>
+                        {{ character?.status }}
                     </mat-card-content>
                 </mat-card>
             </div>
