@@ -1,5 +1,5 @@
-query getCounts {
-  characters {
+query getCounts($filter: FilterCharacter) {
+  characters(filter: $filter) {
     info {
       count
     }

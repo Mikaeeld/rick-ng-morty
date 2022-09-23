@@ -210,7 +210,9 @@ export type GetCharactersQueryVariables = Exact<{
 
 export type GetCharactersQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', results?: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null, species?: string | null, status?: string | null } | null> | null } | null };
 
-export type GetCountsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetCountsQueryVariables = Exact<{
+  filter?: InputMaybe<FilterCharacter>;
+}>;
 
 
 export type GetCountsQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', info?: { __typename?: 'Info', count?: number | null } | null } | null };
@@ -240,8 +242,8 @@ export const GetCharactersDocument = gql`
     }
   }
 export const GetCountsDocument = gql`
-    query getCounts {
-  characters {
+    query getCounts($filter: FilterCharacter) {
+  characters(filter: $filter) {
     info {
       count
     }

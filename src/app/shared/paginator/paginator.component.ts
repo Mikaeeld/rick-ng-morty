@@ -1,6 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GetCountsGQL } from 'src/app/services/rickAndMortyGraphql.service';
+import {
+  FilterCharacter,
+  GetCountsGQL,
+} from 'src/app/services/rickAndMortyGraphql.service';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -8,9 +17,10 @@ import { PageEvent } from '@angular/material/paginator';
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.css'],
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnInit, OnChanges {
   public characterCount = 800;
   public page = 1;
+  @Input() filter: FilterCharacter = {};
 
   constructor(
     private router: Router,
@@ -19,13 +29,22 @@ export class PaginatorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.countServie.fetch().subscribe((result) => {
+    this.getCounts(this.filter);
+    this.route.params.subscribe((params) => {
+      this.page = +params['id'];
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.filter);
+    this.getCounts(this.filter);
+  }
+
+  getCounts(filter: FilterCharacter) {
+    this.countServie.fetch({ filter: filter }).subscribe((result) => {
       if (result.data.characters?.info?.count) {
         this.characterCount = result.data.characters.info.count;
       }
-    });
-    this.route.params.subscribe((params) => {
-      this.page = +params['id'];
     });
   }
 

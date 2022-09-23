@@ -1,6 +1,6 @@
 <div class="content">
     <app-search (filterChange)="filterChanged($event)"></app-search>
-    <app-paginator></app-paginator>
+    <app-paginator [filter]="this.filter"></app-paginator>
     <div *ngIf="characters$ | async as characters">
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
             <div fxFlex="25%" fxFlex.xs="100%" *ngFor="let character of characters.results">
