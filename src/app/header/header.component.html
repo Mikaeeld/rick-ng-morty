@@ -1,3 +1,6 @@
 <mat-toolbar>
-  <span>Rick and Morty</span>
+  <span style="cursor: pointer;" routerLink="/characters/1">Rick and Morty</span>
+  <span style="cursor: pointer; padding-left: 2em;" routerLink="/saved">Saved Characters</span>
+  <span class="spacer"></span>
+  <mat-icon aria-hidden="false" aria-label="Clear filters" (click)="clearFilter()" style="cursor: pointer;">refresh</mat-icon>
 </mat-toolbar>

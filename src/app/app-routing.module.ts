@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CharacterListComponent } from './character-list/character-list.component';
+import { SavedCharactersComponent } from './saved-characters/saved-characters.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '1', pathMatch: 'full'},
-  {path: ':id', component: CharacterListComponent}
+  {path: '', redirectTo: 'characters/1', pathMatch: 'full'},
+  {path: 'characters/:id', component: CharacterListComponent},
+  {path: 'saved', component: SavedCharactersComponent}
 ];
 
 @NgModule({

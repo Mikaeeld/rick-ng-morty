@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
-import { GetCountsGQL } from '../services/rickAndMortyGraphql.service';
+import { FilterCharacter, GetCountsGQL,  } from '../services/rickAndMortyGraphql.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +9,12 @@ import { GetCountsGQL } from '../services/rickAndMortyGraphql.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  @Output() filterClear = new EventEmitter<FilterCharacter>();
   constructor() {}
+
+  clearFilter() {
+    this.filterClear.emit({});
+  }
 
   ngOnInit(): void {}
 }

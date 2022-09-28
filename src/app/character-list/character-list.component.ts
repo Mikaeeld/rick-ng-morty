@@ -3,9 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { SearchComponent } from '../search/search.component';
 import {
+  Character,
   FilterCharacter,
   GetCharactersGQL,
 } from '../services/rickAndMortyGraphql.service';
+import { SavedCharactersService } from '../services/savedCharacters.service';
 
 @Component({
   selector: 'app-character-list',
@@ -19,7 +21,8 @@ export class CharacterListComponent implements OnInit {
   public filter: FilterCharacter = {};
   constructor(
     private route: ActivatedRoute,
-    private characterService: GetCharactersGQL
+    private characterService: GetCharactersGQL,
+    private savedCharacterService: SavedCharactersService
   ) {
     this.route.params.subscribe((params) => {
       this.page = +params['id'];
@@ -39,6 +42,12 @@ export class CharacterListComponent implements OnInit {
   filterChanged($event: FilterCharacter) {
     this.filter = $event;
     this.getCharacters(this.filter);
+  }
+
+  saveCharacter(character: Character | null) {
+    if (character) {
+      this.savedCharacterService.addCharacter(character);
+    }
   }
 
   ngOnInit(): void {}

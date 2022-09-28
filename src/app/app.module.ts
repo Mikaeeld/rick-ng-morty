@@ -18,6 +18,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SearchComponent } from './search/search.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { SavedCharactersComponent } from './saved-characters/saved-characters.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { MatSelectModule } from '@angular/material/select';
     HeaderComponent,
     PaginatorComponent,
     SearchComponent,
+    SavedCharactersComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],

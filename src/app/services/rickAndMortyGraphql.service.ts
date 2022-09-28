@@ -27,7 +27,7 @@ export type Character = {
   /** Time at which the character was created in the database. */
   created?: Maybe<Scalars['String']>;
   /** Episodes in which this character appeared. */
-  episode: Array<Maybe<Episode>>;
+  episode?: Array<Maybe<Episode>>;
   /** The gender of the character ('Female', 'Male', 'Genderless' or 'unknown'). */
   gender?: Maybe<Scalars['String']>;
   /** The id of the character. */

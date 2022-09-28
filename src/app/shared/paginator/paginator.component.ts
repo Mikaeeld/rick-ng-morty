@@ -49,6 +49,6 @@ export class PaginatorComponent implements OnInit, OnChanges {
   }
 
   pageChange($event: PageEvent) {
-    this.router.navigate([`/${$event.pageIndex + 1}`]);
+    this.router.navigate(['characters', $event.pageIndex + 1]);
   }
 }
