@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { SearchComponent } from '../search/search.component';
@@ -22,7 +22,7 @@ export class CharacterListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private characterService: GetCharactersGQL,
-    private savedCharacterService: SavedCharactersService
+    private savedCharacterService: SavedCharactersService,
   ) {
     this.route.params.subscribe((params) => {
       this.page = +params['id'];
@@ -40,7 +40,7 @@ export class CharacterListComponent implements OnInit {
   }
 
   filterChanged($event: FilterCharacter) {
-    this.filter = $event;
+    this.filter = Object.assign({}, $event);
     this.getCharacters(this.filter);
   }
 
