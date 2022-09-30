@@ -62,7 +62,7 @@ export type Episode = {
   /** The air date of the episode. */
   air_date?: Maybe<Scalars['String']>;
   /** List of characters who have been seen in the episode. */
-  characters: Array<Maybe<Character>>;
+  characters?: Array<Maybe<Character>>;
   /** Time at which the episode was created in the database. */
   created?: Maybe<Scalars['String']>;
   /** The code of the episode. */
@@ -121,7 +121,7 @@ export type Location = {
   /** The name of the location. */
   name?: Maybe<Scalars['String']>;
   /** List of characters who have been last seen in the location. */
-  residents: Array<Maybe<Character>>;
+  residents?: Array<Maybe<Character>>;
   /** The type of the location. */
   type?: Maybe<Scalars['String']>;
 };
@@ -210,6 +210,13 @@ export type GetCharactersQueryVariables = Exact<{
 
 export type GetCharactersQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', results?: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null, species?: string | null, status?: string | null } | null> | null } | null };
 
+export type GetCharacterQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetCharacterQuery = { __typename?: 'Query', character?: { __typename?: 'Character', name?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, image?: string | null, origin?: { __typename?: 'Location', name?: string | null, id?: string | null } | null, location?: { __typename?: 'Location', name?: string | null, id?: string | null } | null, episode: Array<{ __typename?: 'Episode', name?: string | null, id?: string | null } | null> } | null };
+
 export type GetCountsQueryVariables = Exact<{
   filter?: InputMaybe<FilterCharacter>;
 }>;
@@ -236,6 +243,41 @@ export const GetCharactersDocument = gql`
   })
   export class GetCharactersGQL extends Apollo.Query<GetCharactersQuery, GetCharactersQueryVariables> {
     override document = GetCharactersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetCharacterDocument = gql`
+    query getCharacter($id: ID!) {
+  character(id: $id) {
+    name
+    status
+    species
+    type
+    gender
+    origin {
+      name
+      id
+    }
+    location {
+      name
+      id
+    }
+    image
+    episode {
+      name
+      id
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetCharacterGQL extends Apollo.Query<GetCharacterQuery, GetCharacterQueryVariables> {
+    override document = GetCharacterDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

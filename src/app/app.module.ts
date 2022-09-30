@@ -21,6 +21,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { SavedCharactersComponent } from './saved-characters/saved-characters.component';
 import { MatButtonModule } from '@angular/material/button';
+import { CharacterComponent } from './character/character.component';
+import { EpisodeListComponent } from './episode-list/episode-list.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { MatButtonModule } from '@angular/material/button';
     PaginatorComponent,
     SearchComponent,
     SavedCharactersComponent,
+    CharacterComponent,
+    EpisodeListComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSelectModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

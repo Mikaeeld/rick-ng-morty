@@ -5,7 +5,7 @@
     <div *ngIf="characters$ | async as characters">
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
             <div fxFlex="25%" fxFlex.xs="100%" *ngFor="let character of characters.results">
-                <mat-card>
+                <mat-card (click)="openDialog(character?.id)">
                     <mat-card-header>
                         <img mat-card-avatar [src]="character?.image" [alt]="character?.name">
                         <mat-card-title>{{ character?.name }}</mat-card-title>

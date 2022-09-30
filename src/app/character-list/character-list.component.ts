@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
+import { CharacterComponent } from '../character/character.component';
 import { SearchComponent } from '../search/search.component';
 import {
   Character,
@@ -23,6 +25,7 @@ export class CharacterListComponent implements OnInit {
     private route: ActivatedRoute,
     private characterService: GetCharactersGQL,
     private savedCharacterService: SavedCharactersService,
+    public dialog: MatDialog
   ) {
     this.route.params.subscribe((params) => {
       this.page = +params['id'];
@@ -48,6 +51,10 @@ export class CharacterListComponent implements OnInit {
     if (character) {
       this.savedCharacterService.addCharacter(character);
     }
+  }
+
+  openDialog(id: string | null | undefined) {
+    this.dialog.open(CharacterComponent, {data: {id: id}});
   }
 
   ngOnInit(): void {}

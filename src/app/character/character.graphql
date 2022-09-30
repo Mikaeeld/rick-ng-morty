@@ -1,0 +1,22 @@
+query getCharacter($index: ID!) {
+  character(id: $index) {
+    name
+    status
+    species
+    type
+    gender
+    origin {
+      name
+      id
+    }
+    location {
+      name
+      id
+    }
+    image
+    episode {
+      name
+      id
+    }
+  }
+}
