@@ -11,13 +11,14 @@ import {
   GetCountsGQL,
 } from 'src/app/services/rickAndMortyGraphql.service';
 import { PageEvent } from '@angular/material/paginator';
+import { FilterService } from 'src/app/services/filter.service';
 
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.css'],
 })
-export class PaginatorComponent implements OnInit, OnChanges {
+export class PaginatorComponent implements OnInit {
   public characterCount = 800;
   public page = 1;
   @Input() filter: FilterCharacter = {};
@@ -25,7 +26,8 @@ export class PaginatorComponent implements OnInit, OnChanges {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private countServie: GetCountsGQL
+    private countServie: GetCountsGQL,
+    private filterService: FilterService
   ) {}
 
   ngOnInit(): void {
@@ -33,11 +35,9 @@ export class PaginatorComponent implements OnInit, OnChanges {
     this.route.params.subscribe((params) => {
       this.page = +params['id'];
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.filter);
-    this.getCounts(this.filter);
+    this.filterService.getFilter().subscribe((filter) => {
+      this.getCounts(filter);
+    });
   }
 
   getCounts(filter: FilterCharacter) {

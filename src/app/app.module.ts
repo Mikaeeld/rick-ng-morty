@@ -24,6 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { CharacterComponent } from './character/character.component';
 import { EpisodeListComponent } from './episode-list/episode-list.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { LocationComponent } from './location/location.component';
+import { EpisodeComponent } from './episode/episode.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     SavedCharactersComponent,
     CharacterComponent,
     EpisodeListComponent,
+    LocationComponent,
+    EpisodeComponent,
   ],
   imports: [
     BrowserModule,

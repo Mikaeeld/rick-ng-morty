@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CharacterComponent } from '../character/character.component';
 import { SearchComponent } from '../search/search.component';
+import { FilterService } from '../services/filter.service';
 import {
   Character,
   FilterCharacter,
@@ -21,11 +22,13 @@ export class CharacterListComponent implements OnInit {
   public page: number = 1;
   public characters: number = 20;
   public filter: FilterCharacter = {};
+  filter$ = new Observable<FilterCharacter>();
   constructor(
     private route: ActivatedRoute,
     private characterService: GetCharactersGQL,
     private savedCharacterService: SavedCharactersService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private filterService: FilterService
   ) {
     this.route.params.subscribe((params) => {
       this.page = +params['id'];
@@ -42,11 +45,6 @@ export class CharacterListComponent implements OnInit {
       .pipe(map((result) => result.data.characters));
   }
 
-  filterChanged($event: FilterCharacter) {
-    this.filter = Object.assign({}, $event);
-    this.getCharacters(this.filter);
-  }
-
   saveCharacter(character: Character | null) {
     if (character) {
       this.savedCharacterService.addCharacter(character);
@@ -54,8 +52,14 @@ export class CharacterListComponent implements OnInit {
   }
 
   openDialog(id: string | null | undefined) {
-    this.dialog.open(CharacterComponent, {data: {id: id}});
+    this.dialog.open(CharacterComponent, { data: { id: id } });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filter$ = this.filterService.getFilter();
+    this.filter$.subscribe((filter) => {
+      this.filter = filter;
+      this.getCharacters(this.filter);
+    });
+  }
 }

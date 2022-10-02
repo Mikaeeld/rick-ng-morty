@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { FilterService } from '../services/filter.service';
 import { FilterCharacter } from '../services/rickAndMortyGraphql.service';
 
 @Component({
@@ -7,23 +8,32 @@ import { FilterCharacter } from '../services/rickAndMortyGraphql.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
-export class SearchComponent implements OnInit {
-  private filter: FilterCharacter = {};
+export class SearchComponent implements OnInit, OnDestroy {
+  filter: FilterCharacter = {};
+  filter$ = new Observable<FilterCharacter>();
   @Output() filterChange = new EventEmitter<FilterCharacter>();
   statuses: string[] = ['Alive', 'Dead', 'unknown'];
   characterStatus: string = '';
 
-  constructor() {}
+  constructor(private filterService: FilterService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filter$ = this.filterService.getFilter();
+    this.filter$.subscribe((filter) => {
+      this.filter = filter;
+    });
+  }
+
+  ngOnDestroy(): void {
+  }
 
   setName(event: any) {
     this.filter.name = event.target.value;
-    this.filterChange.emit(this.filter);
+    this.filterService.setFilter(this.filter);
   }
 
   setStatus(event: any) {
     this.filter.status = event.value;
-    this.filterChange.emit(this.filter);
+    this.filterService.setFilter(this.filter);
   }
 }

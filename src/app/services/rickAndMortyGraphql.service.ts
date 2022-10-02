@@ -208,7 +208,7 @@ export type GetCharactersQueryVariables = Exact<{
 }>;
 
 
-export type GetCharactersQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', results?: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null, species?: string | null, status?: string | null } | null> | null } | null };
+export type GetCharactersQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', results?: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null, species?: string | null, status?: string | null, gender?: string | null } | null> | null } | null };
 
 export type GetCharacterQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -216,6 +216,20 @@ export type GetCharacterQueryVariables = Exact<{
 
 
 export type GetCharacterQuery = { __typename?: 'Query', character?: { __typename?: 'Character', name?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, image?: string | null, origin?: { __typename?: 'Location', name?: string | null, id?: string | null } | null, location?: { __typename?: 'Location', name?: string | null, id?: string | null } | null, episode: Array<{ __typename?: 'Episode', name?: string | null, id?: string | null } | null> } | null };
+
+export type GetEpisodeQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetEpisodeQuery = { __typename?: 'Query', episode?: { __typename?: 'Episode', id?: string | null, name?: string | null, episode?: string | null, characters: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null } | null> } | null };
+
+export type GetLocationQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetLocationQuery = { __typename?: 'Query', location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null, residents: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null } | null> } | null };
 
 export type GetCountsQueryVariables = Exact<{
   filter?: InputMaybe<FilterCharacter>;
@@ -233,6 +247,7 @@ export const GetCharactersDocument = gql`
       image
       species
       status
+      gender
     }
   }
 }
@@ -249,8 +264,8 @@ export const GetCharactersDocument = gql`
     }
   }
 export const GetCharacterDocument = gql`
-    query getCharacter($id: ID!) {
-  character(id: $id) {
+    query getCharacter($index: ID!) {
+  character(id: $index) {
     name
     status
     species
@@ -278,6 +293,57 @@ export const GetCharacterDocument = gql`
   })
   export class GetCharacterGQL extends Apollo.Query<GetCharacterQuery, GetCharacterQueryVariables> {
     override document = GetCharacterDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetEpisodeDocument = gql`
+    query getEpisode($id: ID!) {
+  episode(id: $id) {
+    id
+    name
+    episode
+    characters {
+      id
+      name
+      image
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetEpisodeGQL extends Apollo.Query<GetEpisodeQuery, GetEpisodeQueryVariables> {
+    override document = GetEpisodeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetLocationDocument = gql`
+    query getLocation($id: ID!) {
+  location(id: $id) {
+    id
+    name
+    type
+    dimension
+    residents {
+      id
+      name
+      image
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetLocationGQL extends Apollo.Query<GetLocationQuery, GetLocationQueryVariables> {
+    override document = GetLocationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
