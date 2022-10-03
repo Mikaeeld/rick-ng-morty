@@ -1,1 +1,21 @@
-<p>episode works!</p>
+<h1>{{ episode.name }}</h1>
+<hr>
+<h2>Characters:</h2>
+<div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="25%" fxFlex.xs="100%" *ngFor="let character of episode.characters">
+        <mat-card (click)="openCharacterDialog(character?.id)">
+            <mat-card-header>
+                <img mat-card-avatar [src]="character?.image" [alt]="character?.name">
+                <mat-card-title>{{ character?.name }}</mat-card-title>
+                <mat-card-subtitle>{{ character?.species }}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="character?.image" [alt]="character?.name">
+            <mat-card-content>
+                {{ character?.status }}
+            </mat-card-content>
+            <mat-card-actions>
+                <!-- <button mat-button (click)="saveCharacter(character)">Save</button> -->
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

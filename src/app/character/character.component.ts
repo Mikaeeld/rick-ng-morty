@@ -33,7 +33,7 @@ export class CharacterComponent implements OnInit {
     //     });
     // });
     if (this.data.id) {
-      this.getCharacter.fetch({ id: this.data.id }).subscribe((result) => {
+      this.getCharacter.fetch({ index: this.data.id }).subscribe((result) => {
         if (result.data.character) {
           this.character = result.data.character;
         }

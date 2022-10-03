@@ -15,7 +15,7 @@
                         {{ character?.status }}
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button (click)="saveCharacter(character)">Save</button>
+                        <button mat-button (click)="saveCharacter(character); $event.stopPropagation()">Save</button>
                     </mat-card-actions>
                 </mat-card>
             </div>

@@ -1,1 +1,23 @@
-<p>location works!</p>
+<h1>{{ location.name }}</h1>
+<h3>{{ location.type }}</h3>
+<h3>{{ location.dimension }}</h3>
+<hr>
+<h2>Residents:</h2>
+<div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="25%" fxFlex.xs="100%" *ngFor="let character of location.residents">
+        <mat-card (click)="openCharacterDialog(character?.id)">
+            <mat-card-header>
+                <img mat-card-avatar [src]="character?.image" [alt]="character?.name">
+                <mat-card-title>{{ character?.name }}</mat-card-title>
+                <mat-card-subtitle>{{ character?.species }}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="character?.image" [alt]="character?.name">
+            <mat-card-content>
+                {{ character?.status }}
+            </mat-card-content>
+            <mat-card-actions>
+                <!-- <button mat-button (click)="saveCharacter(character)">Save</button> -->
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

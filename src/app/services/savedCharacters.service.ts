@@ -12,4 +12,10 @@ export class SavedCharactersService {
   getCharacters() {
     return this.savedCharacters.slice();
   }
+
+  removeCharacter(id: string | null | undefined) {
+    this.savedCharacters = this.savedCharacters.filter(
+      (character) => character.id !== id
+    );
+  }
 }
